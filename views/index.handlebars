@@ -1,0 +1,29 @@
+<style type="text/css">
+  #cesiumContainer { width: 100%; height: 100%; }
+  #dataSources { position: absolute; top: 20px; left: 20px; }
+</style>
+<div id="cesiumContainer" style="width:100%; height:100%;"></div>
+<div id="dataSources">
+  <select onchange="if (this.value=='none') return; chooseDataSource(this.value);">
+    <option value="none">choose a data source to render</option>
+    {{#each dataSources}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+</div>
+<script>
+  Cesium.Ion.defaultAccessToken = '{{accessToken}}';
+
+  var viewer = new Cesium.Viewer('cesiumContainer', {
+      terrainProvider : Cesium.createWorldTerrain(),
+      baseLayerPicker : true,
+      shouldAnimate : true
+  });
+
+  var chooseDataSource = (dataSource) => {
+    viewer.dataSources.removeAll();
+    viewer.dataSources.add(Cesium.CzmlDataSource.load('/data/'+dataSource+'.json')).then(function(ds) {
+        viewer.trackedEntity = ds.entities.getById('path');
+    });
+  };
+</script>

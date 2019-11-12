@@ -1,0 +1,46 @@
+[
+  {
+      "id" : "document",
+      "name" : "CZML Path",
+      "version" : "1.0",
+      "clock": {
+          "interval": "{{{intervalStart}}}/{{{intervalEnd}}}",
+          "currentTime": "{{{intervalStart}}}",
+          "multiplier": 1
+      }
+  },
+  {
+    "id" : "path",
+    "name" : "flight path",
+    "description" : "foo",
+    "path" : {
+        "material" : {
+            "polylineOutline" : {
+                "color" : {
+                    "rgba" : [255, 0, 255, 255]
+                },
+                "outlineColor" : {
+                    "rgba" : [0, 255, 255, 255]
+                },
+                "outlineWidth" : 5
+            }
+        },
+        "width" : 8,
+        "leadTime" : 0,
+        "trailTime": 2000,
+        "resolution" : 5
+    },
+    "billboard" : {
+        "image": {
+          "uri": "/drone.png"
+        },
+        "scale" : 0.2,
+        "scaleByDistance": {
+            "nearFarScalar": [ 4.0, 2.0, 100.0, 0.5 ]
+        }
+    },
+    "position" : {
+        "epoch" : "{{{intervalStart}}}",
+        "cartographicDegrees" : {{{flightData}}}
+    }
+}]
